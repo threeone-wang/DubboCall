@@ -125,7 +125,6 @@ public class SettingService {
             e.printStackTrace();
         }
         this.overrideLogFile();
-
     }
 
     public void resetFromConfigFile(){

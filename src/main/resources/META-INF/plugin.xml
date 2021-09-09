@@ -36,6 +36,7 @@
         <!-- Add your actions here -->
         <action id="com.yitulin.dubbocall.action.HttpRequestCallAction" class="com.yitulin.dubbocall.action.HttpRequestCallAction" text="发起HTTP请求" description="发起HTTP请求">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift meta P"/>
         </action>
     </actions>
 
