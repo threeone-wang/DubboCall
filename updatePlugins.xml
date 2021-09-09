@@ -9,12 +9,15 @@
       url - path to download the plugin JAR/ZIP file. Required. Must be HTTPS
       version - version of this plugin. Required. Must match <version> in plugin.xml
     -->
-    <plugin id="com.yitulin.dubbo-call" url="https://github.com/yitulin/DubboCall/raw/master/distributions/dubbo-call-1.2.0-SNAPSHOT.zip" version="1.2.0-SNAPSHOT">
+    <plugin id="com.yitulin.dubbo-call" url="https://github.com/yitulin/DubboCall/raw/master/distributions/dubbo-call-1.2.1-SNAPSHOT.zip" version="1.2.1-SNAPSHOT">
 
 
         <name>DubboCall</name>
         <description><![CDATA[解析方法、参数，更便捷的通过HTTP调用。]]></description>
         <change-notes><![CDATA[
+            v1.2.1-SNAPSHOT:
+            记录文件被覆盖导致记录丢失bugfix。
+            <br/>
             v1.2.0-SNAPSHOT:
             配置持久化文件独立与插件平台，导出旧版配置，支持指定配置文件。
             配置文件同级目录下，将创建记录文件。
