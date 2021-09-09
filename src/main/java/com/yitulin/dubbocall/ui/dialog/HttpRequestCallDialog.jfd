@@ -1,0 +1,213 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"$sizePolicy": 1
+			"title": "发起请求"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0, 0, 0"
+					"$rowSpecs": "0, 0, 0, 0, 0, 0"
+					"$hGap": 5
+					"$vGap": 5
+					"$alignLeft": true
+					"$alignTop": true
+				} ) {
+					name: "contentPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "模板："
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"weighty": 1.0
+						"weightx": 1.0
+						"hAlign": 4
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "templateNameComboBox"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "templateNameComboBoxActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"weightx": 9.0
+						"weighty": 1.0
+						"vAlign": 0
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "url："
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 1
+						"weightx": 1.0
+						"weighty": 1.0
+						"hAlign": 4
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "urlTextArea"
+							"columns": 50
+							"rows": 3
+							"lineWrap": true
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 1
+						"weightx": 9.0
+						"weighty": 1.0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "resetUrlButton"
+						"text": "重置url"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "resetUrlButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+						"gridy": 1
+						"vAlign": 3
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "header："
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 2
+						"weighty": 2.0
+						"weightx": 1.0
+						"hAlign": 4
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane2"
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "headerTextArea"
+							"rows": 6
+							"columns": 50
+							"lineWrap": true
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 2
+						"weighty": 2.0
+						"weightx": 9.0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "resetHeaderButton"
+						"text": "重置请求头"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "resetHeaderButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+						"gridy": 2
+						"vAlign": 3
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "body："
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 3
+						"weighty": 3.0
+						"weightx": 1.0
+						"hAlign": 4
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane3"
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "bodyTextArea"
+							"columns": 50
+							"rows": 7
+							"lineWrap": true
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 3
+						"weightx": 9.0
+						"weighty": 2.9
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "resetBodyButton"
+						"text": "重置请求体"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "resetBodyButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+						"gridy": 3
+						"vAlign": 3
+					} )
+					add( new FormComponent( "javax.swing.JSeparator" ) {
+						name: "separator1"
+						"foreground": new java.awt.Color( 255, 0, 0, 255 )
+						"background": new java.awt.Color( 255, 0, 0, 255 )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 4
+						"gridwidth": 2
+						"weighty": 0.1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "请求结果："
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 5
+						"weighty": 3.0
+						"weightx": 1.0
+						"hAlign": 4
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane4"
+						add( new FormComponent( "javax.swing.JTextArea" ) {
+							name: "resultTextArea"
+							"rows": 13
+							"lineWrap": true
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 5
+						"weighty": 3.0
+						"weightx": 9.0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "cleanResultButton"
+						"text": "清空结果"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cleanResultButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+						"gridy": 5
+						"vAlign": 3
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0:1.0, 0, 0"
+					"$rowSpecs": "0"
+					"$hGap": 5
+					"$vGap": 5
+				} ) {
+					name: "buttonBar"
+					"border": new javax.swing.border.EmptyBorder( 12, 0, 0, 0 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "sendRequestButton"
+						"text": "发送"
+						"horizontalTextPosition": 0
+						"background": sfield java.awt.Color red
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "sendRequestButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "cancelButton"
+						"text": "关闭"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 650, 600 )
+		} )
+	}
+}

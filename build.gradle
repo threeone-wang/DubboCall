@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '1.1.2'
+}
+
+group 'com.yitulin'
+version '1.2.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.78'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor('org.projectlombok:lombok:1.18.20')
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    compile 'cn.hutool:hutool-all:5.7.11'
+    implementation 'commons-collections:commons-collections:20040616'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.5'
+
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version = '2021.1'
+    plugins = ['java']
+    updateSinceUntilBuild = false
+}
+
+publishPlugin {
+//    channels = 'Stable'
+    def jsonFile = file('/Users/yitu/OneDrive/就在脚下/我的项目/DubboCall/project-settings.json')
+    def parsedJson = new groovy.json.JsonSlurper().parseText(jsonFile.text)
+    def publishPluginToken = parsedJson.DUBBO_CALL_GRADLE_intellijPublishToken
+    println("publishPluginToken is:".plus(publishPluginToken))
+    token = publishPluginToken
+}
+
+patchPluginXml {
+
+}
+
+test {
+    useJUnitPlatform()
+}
