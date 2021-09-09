@@ -40,6 +40,11 @@
     </actions>
 
     <change-notes><![CDATA[
+    <p>1.2.1-SNAPSHOT</p>
+    <ul>
+    <li>记录数据丢失bugfix</li>
+    </ul>
+
     <p>1.2.0-SNAPSHOT</p>
     <ul>
     <li>配置持久化文件独立与插件平台，导出旧版配置，支持指定配置文件。</li>
