@@ -24,17 +24,22 @@ import com.yitulin.dubbocall.infrastructure.utils.JacksonUtil;
 import com.yitulin.dubbocall.infrastructure.utils.JsonUtil;
 
 import cn.hutool.json.JSONUtil;
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 
 /**
  * @author unknown
  */
 public class HttpRequestCallDialog extends JDialog {
 
+    private static final Log LOG = LogFactory.get();
+
     private CompatibleSettingService compatibleSettingService = CompatibleSettingService.getInstance();
 
     private HttpRequestCallEntity httpRequestCallEntity=HttpRequestCallEntity.builder().build();
 
     public HttpRequestCallDialog(MethodDetailEntity methodDetailEntity) {
+        LOG.info("初始化请求调用对话框");
         initComponents();
         // ImageIcon icon= new ImageIcon(getClass().getResource("/images/\u53d1\u9001.png"));
         // Image img = icon.getImage();
@@ -46,6 +51,7 @@ public class HttpRequestCallDialog extends JDialog {
     }
 
     private void initData(MethodDetailEntity methodDetailEntity){
+        LOG.info("请求调用对话框初始化数据,params:[{}]",methodDetailEntity);
         httpRequestCallEntity.setMethodDetailEntity(methodDetailEntity);
 
         // 获取所有模板配置数据
@@ -138,6 +144,7 @@ public class HttpRequestCallDialog extends JDialog {
     }
 
     private void sendRequestButtonActionPerformed(ActionEvent e) {
+        LOG.info("点击了发送请求按钮");
         HttpRequestCallEntity callEntity = HttpRequestCallEntity.builder()
                 .methodDetailEntity(httpRequestCallEntity.getMethodDetailEntity())
                 .url(urlTextArea.getText())
@@ -145,7 +152,7 @@ public class HttpRequestCallDialog extends JDialog {
                 .bodyJson(JsonUtil.tightJsonStr(bodyTextArea.getText()))
                 .build();
         String httpResponseString = callEntity.sendHttpPost();
-        httpResponseString= JSONUtil.formatJsonStr(httpResponseString);
+        httpResponseString = JSONUtil.formatJsonStr(httpResponseString);
         resultTextArea.setText(httpResponseString);
 
         String selectedTemplateName = templateNameComboBox.getSelectedItem().toString();

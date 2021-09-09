@@ -116,14 +116,16 @@ public class SettingService {
     }
 
     public void initLogFile(){
-        if (!this.logFile.exists()){
-            try {
-                this.logFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (this.logFile.exists()){
+            return;
+        }
+        try {
+            this.logFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         this.overrideLogFile();
+
     }
 
     public void resetFromConfigFile(){
