@@ -4,14 +4,9 @@
     <vendor email="yitulin@outlook.com">yitulin</vendor>
 
     <description><![CDATA[
-    <h3>English</h3>
     <ul>
-    <li>Analysis method and parameters,More convenient HTTP call.</li>
-    </ul>
-    <h3>中文</h3>
-    <ul>
-    <li>助您解析方法、参数，更便捷的通过HTTP调用。</li>
-    <li>举个🌰：可用于请求「DUBBO泛化调用封装平台」，实现更快捷高效的接口调试、数据确认等操作</li>
+    <li>解析方法、参数，根据设定的模板进行HTTP调用。</li>
+    <li>举个🌰：在IDEA中请求「DUBBO泛化调用封装平台」，实现更快捷高效的接口调用操作。</li>
     </ul>
     <br>
     GitHub: <a href="https://github.com/yitulin/DubboCall">https://github.com/yitulin/DubboCall</a>
@@ -27,7 +22,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <applicationConfigurable dynamic="true"  instance="com.yitulin.dubbocall.ui.setting.GlobalConfigSetting"/>
-<!--        <notificationGroup displayType="BALLOON" id="com.yitulin.dubbocall.notification.group"/>-->
+        <!--        <notificationGroup displayType="BALLOON" id="com.yitulin.dubbocall.notification.group"/>-->
 
         <applicationService serviceInterface="com.yitulin.dubbocall.infrastructure.config.Settings" serviceImplementation="com.yitulin.dubbocall.infrastructure.config.Settings"/>
     </extensions>
@@ -41,49 +36,16 @@
     </actions>
 
     <change-notes><![CDATA[
-    <p>1.2.1-SNAPSHOT</p>
-    <ul>
-    <li>记录数据丢失bugfix</li>
-    </ul>
-
-    <p>1.2.0-SNAPSHOT</p>
-    <ul>
-    <li>配置持久化文件独立与插件平台，导出旧版配置，支持指定配置文件。</li>
-    <li>配置文件同级目录下，将创建记录文件。</li>
-    </ul>
-
-    <p>1.1.6-SNAPSHOT</p>
-    <ul>
-    <li>reset url,header,body. quickly import all configurations</li>
-    </ul>
-    <ul>
-    <li>支持url、请求头、请求体内容重置。一键导入配置。</li>
-    </ul>
-
-    <p>1.1.5-SNAPSHOT</p>
-    <ul>
-    <li>import template bugfix</li>
-    </ul>
-    <ul>
-    <li>导入模板配置bugfix。</li>
-    </ul>
-
-    <p>1.1.2-SNAPSHOT</p>
-    <ul>
-    <li>pretty json.</li>
-    </ul>
-    <ul>
-    <li>文本框内容json美化。</li>
-    </ul>
-
-    <p>1.1.0-SNAPSHOT</p>
-    <ul>
-    <li>global config</li>
-    <li>New features in template settings, such as import,share,copy.</li>
-    </ul>
-    <ul>
-    <li>优化交互；增加了自定义全局配置；模板增加导入、分享、复制功能。</li>
-    </ul>
+    v1.2.2-SNAPSHOT：
+    发起请求事件增加快捷键。
+    <br/>
+    v1.2.1-SNAPSHOT：
+    记录文件被覆盖导致记录丢失bugfix。
+    <br/>
+    v1.2.0-SNAPSHOT：
+    配置持久化文件独立与插件平台，导出旧版配置，支持指定配置文件。
+    配置文件同级目录下，将创建记录文件。
+    <br/>
     ]]></change-notes>
 
 </idea-plugin>
