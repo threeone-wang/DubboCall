@@ -9,7 +9,7 @@
       url - path to download the plugin JAR/ZIP file. Required. Must be HTTPS
       version - version of this plugin. Required. Must match <version> in plugin.xml
     -->
-    <plugin id="com.yitulin.dubbo-call" url="https://github.com/yitulin/DubboCall/raw/master/distributions/dubbo-call-1.2.2-SNAPSHOT.zip" version="1.2.2-SNAPSHOT">
+    <plugin id="com.yitulin.dubbo-call" url="https://github.com/yitulin/DubboCall/raw/master/distributions/dubbo-call-1.2.3-SNAPSHOT.zip" version="1.2.3-SNAPSHOT">
         <name>DubboCall</name>
         <description><![CDATA[解析方法、参数，更便捷的通过HTTP调用。]]></description>
         <change-notes><![CDATA[
