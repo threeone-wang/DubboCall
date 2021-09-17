@@ -13,6 +13,9 @@
         <name>DubboCall</name>
         <description><![CDATA[解析方法、参数，更便捷的通过HTTP调用。]]></description>
         <change-notes><![CDATA[
+        v1.2.3-SNAPSHOT：
+        bug修复。
+        <br/>
         v1.2.2-SNAPSHOT：
         发起请求事件增加快捷键。
         <br/>
