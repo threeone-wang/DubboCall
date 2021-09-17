@@ -109,8 +109,9 @@ public class HttpRequestCallDialog extends JDialog {
 
     private boolean refreshUiByLog(String templateName){
         // 如果有请求记录，根据记录取数据展示
-        if (compatibleSettingService.readLogMap().containsKey(httpRequestCallEntity.concatLogKey(templateName))){
-            refreshUiByLog(compatibleSettingService.readLogMap().get(httpRequestCallEntity.concatLogKey(templateName)));
+        String logKey = httpRequestCallEntity.concatLogKey(templateName);
+        if (compatibleSettingService.readLogMap().containsKey(logKey)){
+            refreshUiByLog(compatibleSettingService.readLogMap().get(logKey));
             return true;
         }
         return false;
@@ -133,13 +134,14 @@ public class HttpRequestCallDialog extends JDialog {
 
     private void templateNameComboBoxActionPerformed(ActionEvent e) {
         String selectedTemplateName = templateNameComboBox.getSelectedItem().toString();
+
+        // 如果没有记录，根据模板设置生成默认的数据展示
+        generateHttpRequestCallEntity(selectedTemplateName);
+
         // 如果有请求记录，根据记录取数据展示
         if (refreshUiByLog(selectedTemplateName)){
             return;
         }
-
-        // 如果没有记录，根据模板设置生成默认的数据展示
-        generateHttpRequestCallEntity(selectedTemplateName);
         refreshUi();
     }
 
@@ -208,17 +210,20 @@ public class HttpRequestCallDialog extends JDialog {
 
         //======== this ========
         setTitle("\u53d1\u8d77\u8bf7\u6c42");
-        Container contentPane = getContentPane();
+        var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-                    0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-                    . BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-                    red) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-                beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder (
+            new javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion"
+            , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM
+            , new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 )
+            ,java . awt. Color .red ) ,dialogPane. getBorder () ) ); dialogPane. addPropertyChangeListener(
+            new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+            ) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
+            ;} } );
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -232,20 +237,20 @@ public class HttpRequestCallDialog extends JDialog {
                 //---- label1 ----
                 label1.setText("\u6a21\u677f\uff1a");
                 contentPanel.add(label1, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0,
-                        GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //---- templateNameComboBox ----
                 templateNameComboBox.addActionListener(e -> templateNameComboBoxActionPerformed(e));
                 contentPanel.add(templateNameComboBox, new GridBagConstraints(1, 0, 1, 1, 9.0, 1.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //---- label2 ----
                 label2.setText("url\uff1a");
                 contentPanel.add(label2, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
-                        GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //======== scrollPane1 ========
                 {
@@ -257,21 +262,21 @@ public class HttpRequestCallDialog extends JDialog {
                     scrollPane1.setViewportView(urlTextArea);
                 }
                 contentPanel.add(scrollPane1, new GridBagConstraints(1, 1, 1, 1, 9.0, 1.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //---- resetUrlButton ----
                 resetUrlButton.setText("\u91cd\u7f6eurl");
                 resetUrlButton.addActionListener(e -> resetUrlButtonActionPerformed(e));
                 contentPanel.add(resetUrlButton, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
-                        new Insets(0, 0, 5, 0), 0, 0));
+                    GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
+                    new Insets(0, 0, 5, 0), 0, 0));
 
                 //---- label3 ----
                 label3.setText("header\uff1a");
                 contentPanel.add(label3, new GridBagConstraints(0, 2, 1, 1, 1.0, 2.0,
-                        GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //======== scrollPane2 ========
                 {
@@ -283,21 +288,21 @@ public class HttpRequestCallDialog extends JDialog {
                     scrollPane2.setViewportView(headerTextArea);
                 }
                 contentPanel.add(scrollPane2, new GridBagConstraints(1, 2, 1, 1, 9.0, 2.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //---- resetHeaderButton ----
                 resetHeaderButton.setText("\u91cd\u7f6e\u8bf7\u6c42\u5934");
                 resetHeaderButton.addActionListener(e -> resetHeaderButtonActionPerformed(e));
                 contentPanel.add(resetHeaderButton, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
-                        new Insets(0, 0, 5, 0), 0, 0));
+                    GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
+                    new Insets(0, 0, 5, 0), 0, 0));
 
                 //---- label4 ----
                 label4.setText("body\uff1a");
                 contentPanel.add(label4, new GridBagConstraints(0, 3, 1, 1, 1.0, 3.0,
-                        GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //======== scrollPane3 ========
                 {
@@ -309,28 +314,28 @@ public class HttpRequestCallDialog extends JDialog {
                     scrollPane3.setViewportView(bodyTextArea);
                 }
                 contentPanel.add(scrollPane3, new GridBagConstraints(1, 3, 1, 1, 9.0, 2.9,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //---- resetBodyButton ----
                 resetBodyButton.setText("\u91cd\u7f6e\u8bf7\u6c42\u4f53");
                 resetBodyButton.addActionListener(e -> resetBodyButtonActionPerformed(e));
                 contentPanel.add(resetBodyButton, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
-                        new Insets(0, 0, 5, 0), 0, 0));
+                    GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
+                    new Insets(0, 0, 5, 0), 0, 0));
 
                 //---- separator1 ----
                 separator1.setForeground(Color.red);
                 separator1.setBackground(Color.red);
                 contentPanel.add(separator1, new GridBagConstraints(0, 4, 2, 1, 0.0, 0.1,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 5, 5), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 5), 0, 0));
 
                 //---- label5 ----
                 label5.setText("\u8bf7\u6c42\u7ed3\u679c\uff1a");
                 contentPanel.add(label5, new GridBagConstraints(0, 5, 1, 1, 1.0, 3.0,
-                        GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
-                        new Insets(0, 0, 0, 5), 0, 0));
+                    GridBagConstraints.EAST, GridBagConstraints.VERTICAL,
+                    new Insets(0, 0, 0, 5), 0, 0));
 
                 //======== scrollPane4 ========
                 {
@@ -341,15 +346,15 @@ public class HttpRequestCallDialog extends JDialog {
                     scrollPane4.setViewportView(resultTextArea);
                 }
                 contentPanel.add(scrollPane4, new GridBagConstraints(1, 5, 1, 1, 9.0, 3.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 5), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 0, 5), 0, 0));
 
                 //---- cleanResultButton ----
                 cleanResultButton.setText("\u6e05\u7a7a\u7ed3\u679c");
                 cleanResultButton.addActionListener(e -> cleanResultButtonActionPerformed(e));
                 contentPanel.add(cleanResultButton, new GridBagConstraints(2, 5, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
-                        new Insets(0, 0, 0, 0), 0, 0));
+                    GridBagConstraints.SOUTH, GridBagConstraints.HORIZONTAL,
+                    new Insets(0, 0, 0, 0), 0, 0));
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
 
@@ -365,15 +370,15 @@ public class HttpRequestCallDialog extends JDialog {
                 sendRequestButton.setBackground(Color.red);
                 sendRequestButton.addActionListener(e -> sendRequestButtonActionPerformed(e));
                 buttonBar.add(sendRequestButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 5), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 0, 5), 0, 0));
 
                 //---- cancelButton ----
                 cancelButton.setText("\u5173\u95ed");
                 cancelButton.addActionListener(e -> cancelButtonActionPerformed(e));
                 buttonBar.add(cancelButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 0), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 0, 0), 0, 0));
             }
             dialogPane.add(buttonBar, BorderLayout.SOUTH);
         }

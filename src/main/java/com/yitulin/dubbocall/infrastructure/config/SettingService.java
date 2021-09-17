@@ -19,6 +19,7 @@ import com.yitulin.dubbocall.infrastructure.common.Constants;
 import com.yitulin.dubbocall.infrastructure.utils.JsonFileUtil;
 import com.yitulin.dubbocall.infrastructure.utils.PropertiesComponentUtil;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -54,6 +55,10 @@ public class SettingService {
                 SettingService settingService = new SettingService();
                 String configFilePath = PropertiesComponentUtil.read(Constants.CONFIG_FILE_PATH_KEY);
                 if (Strings.isNullOrEmpty(configFilePath)) {
+                    settingService.settingAggregate =new SettingAggregate(true);
+                    return settingService;
+                }
+                if (!FileUtil.exist(configFilePath)){
                     settingService.settingAggregate =new SettingAggregate(true);
                     return settingService;
                 }

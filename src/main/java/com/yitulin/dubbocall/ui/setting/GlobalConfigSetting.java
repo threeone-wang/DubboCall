@@ -55,7 +55,7 @@ public class GlobalConfigSetting extends JPanel implements Configurable,Configur
     public GlobalConfigSetting() {
         initComponents();
         if (settingService.configFileExists()){
-            configFilePathLabel.setText(configFilePathLabel.getText()+ settingService.getConfigFilePath());
+            configFilePathLabel.setText(settingService.getConfigFilePath());
         }
         initConfigTableData();
     }
@@ -135,13 +135,15 @@ public class GlobalConfigSetting extends JPanel implements Configurable,Configur
         if (!yesNo){
             return;
         }
-        configFilePathLabel.setText(configFilePathLabel.getText()+selectedFile.getPath());
+        configFilePathLabel.setText(selectedFile.getPath());
         this.settingService.resetConfigFile(selectedFile);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
+        panel2 = new JPanel();
+        descLabel = new JLabel();
         configFilePathLabel = new JLabel();
         selectConfigFileButton = new JButton();
         scrollPane1 = new JScrollPane();
@@ -152,22 +154,27 @@ public class GlobalConfigSetting extends JPanel implements Configurable,Configur
         deleteRow = new JButton();
 
         //======== this ========
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-        . border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder
-        . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
-        awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder( )) )
-        ;  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-        ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-        ;
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+        0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+        . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+        red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+        beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
         setLayout(new GridBagLayout());
         ((GridBagLayout)getLayout()).columnWidths = new int[] {0, 0, 0};
         ((GridBagLayout)getLayout()).rowHeights = new int[] {34, 0, 0};
         ((GridBagLayout)getLayout()).columnWeights = new double[] {0.01, 0.0, 1.0E-4};
         ((GridBagLayout)getLayout()).rowWeights = new double[] {0.01, 0.01, 1.0E-4};
 
-        //---- configFilePathLabel ----
-        configFilePathLabel.setText("\u5f53\u524d\u914d\u7f6e\u6587\u4ef6\u8def\u5f84\uff1a");
-        add(configFilePathLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+        //======== panel2 ========
+        {
+            panel2.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+            //---- descLabel ----
+            descLabel.setText("\u5f53\u524d\u914d\u7f6e\u6587\u4ef6\u8def\u5f84\uff1a");
+            panel2.add(descLabel);
+            panel2.add(configFilePathLabel);
+        }
+        add(panel2, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 0), 0, 0));
 
@@ -330,6 +337,8 @@ public class GlobalConfigSetting extends JPanel implements Configurable,Configur
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
+    private JPanel panel2;
+    private JLabel descLabel;
     private JLabel configFilePathLabel;
     private JButton selectConfigFileButton;
     private JScrollPane scrollPane1;

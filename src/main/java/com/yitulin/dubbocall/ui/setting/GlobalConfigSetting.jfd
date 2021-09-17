@@ -10,9 +10,17 @@ new FormModel {
 			"$alignLeft": true
 		} ) {
 			name: "this"
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "configFilePathLabel"
-				"text": "当前配置文件路径："
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+				"alignment": 0
+			} ) {
+				name: "panel2"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "descLabel"
+					"text": "当前配置文件路径："
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "configFilePathLabel"
+				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "selectConfigFileButton"
