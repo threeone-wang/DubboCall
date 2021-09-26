@@ -1,6 +1,7 @@
 package com.yitulin.dubbocall.infrastructure.utils;
 
 import com.alibaba.fastjson.JSONValidator;
+import com.google.gson.Gson;
 
 import cn.hutool.json.JSONUtil;
 
@@ -11,6 +12,11 @@ import cn.hutool.json.JSONUtil;
  * Modified By:
  */
 public class JsonUtil {
+
+    public static <T> T from(String jsonStr,Class<T> cls){
+        Gson gson=new Gson();
+        return gson.fromJson(jsonStr, cls);
+    }
 
     public static String tightJsonStr(String jsonStr){
         if (!JSONValidator.from(jsonStr).validate()){

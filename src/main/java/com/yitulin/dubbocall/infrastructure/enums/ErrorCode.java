@@ -22,6 +22,11 @@ public enum ErrorCode {
      * HTTP请求模板设置错误
      */
     HTTP_REQUEST_TEMPLATE_ERROR("10100","HTTP请求模板设置错误"),
+
+    /**
+     * HTTP请求模板设置错误
+     */
+    HTTP_REQUEST_CALL_ERROR("10200","HTTP请求调用事件错误"),
     ;
 
     private String code;

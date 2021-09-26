@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.11" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.12" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -176,7 +176,7 @@ new FormModel {
 					"value": "Center"
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-					"$columnSpecs": "0:1.0, 0, 0"
+					"$columnSpecs": "0:1.0, 0, 0, 0"
 					"$rowSpecs": "0"
 					"$hGap": 5
 					"$vGap": 5
@@ -184,20 +184,27 @@ new FormModel {
 					name: "buttonBar"
 					"border": new javax.swing.border.EmptyBorder( 12, 0, 0, 0 )
 					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "copyAsCurlButton"
+						"text": "复制为CURL"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "copyAsCurlButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "sendRequestButton"
 						"text": "发送"
 						"horizontalTextPosition": 0
 						"background": sfield java.awt.Color red
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "sendRequestButtonActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridx": 1
+						"gridx": 2
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "cancelButton"
 						"text": "关闭"
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelButtonActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-						"gridx": 2
+						"gridx": 3
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "South"

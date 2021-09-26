@@ -20,8 +20,14 @@ import com.yitulin.dubbocall.domain.request.entity.MethodDetailEntity;
 import com.yitulin.dubbocall.domain.request.entity.VariableEntity;
 import com.yitulin.dubbocall.infrastructure.config.CompatibleSettingService;
 import com.yitulin.dubbocall.infrastructure.enums.ConfigTypeEnum;
+import com.yitulin.dubbocall.infrastructure.enums.ErrorCode;
+import com.yitulin.dubbocall.infrastructure.utils.AlertMessageUtil;
+import com.yitulin.dubbocall.infrastructure.utils.AssertWithMessageUtil;
+import com.yitulin.dubbocall.infrastructure.utils.ClipboardUtil;
+import com.yitulin.dubbocall.infrastructure.utils.ConcatUtil;
 import com.yitulin.dubbocall.infrastructure.utils.JacksonUtil;
 import com.yitulin.dubbocall.infrastructure.utils.JsonUtil;
+import com.yitulin.dubbocall.infrastructure.utils.JsonValidatorUtil;
 
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
@@ -180,6 +186,22 @@ public class HttpRequestCallDialog extends JDialog {
         bodyTextArea.setText(JsonUtil.prettyJsonStr(httpRequestCallEntity.getBodyJson()));
     }
 
+    private void copyAsCurlButtonActionPerformed(ActionEvent e) {
+        // TODO add your code here
+        String urlTextAreaText = urlTextArea.getText();
+        String headerTextAreaText = headerTextArea.getText();
+        String bodyTextAreaText = bodyTextArea.getText();
+        if (!AssertWithMessageUtil.assertTrue(JsonValidatorUtil.valid(headerTextAreaText), ErrorCode.HTTP_REQUEST_CALL_ERROR,"请求头内容不是一个合法的json串")){
+            return;
+        }
+        if (!AssertWithMessageUtil.assertTrue(JsonValidatorUtil.valid(bodyTextAreaText), ErrorCode.HTTP_REQUEST_CALL_ERROR,"请求体内容不是一个合法的json串")){
+            return;
+        }
+        String curl = ConcatUtil.concatCurl(HttpRequestCallEntity.builder().url(urlTextAreaText).headerJson(headerTextAreaText).bodyJson(bodyTextAreaText).build());
+        ClipboardUtil.writeString(curl);
+        AlertMessageUtil.alertInfo("curl内容已复制到剪贴板","HTTP请求事件");
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -205,6 +227,7 @@ public class HttpRequestCallDialog extends JDialog {
         resultTextArea = new JTextArea();
         cleanResultButton = new JButton();
         buttonBar = new JPanel();
+        copyAsCurlButton = new JButton();
         sendRequestButton = new JButton();
         cancelButton = new JButton();
 
@@ -216,13 +239,12 @@ public class HttpRequestCallDialog extends JDialog {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
-            javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax
-            .swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
-            .awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
-            .Color.red),dialogPane. getBorder()));dialogPane. addPropertyChangeListener(new java.beans.
-            PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".
-            equals(e.getPropertyName()))throw new RuntimeException();}});
+            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
+            ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
+            .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
+            . Color .red ) ,dialogPane. getBorder () ) ); dialogPane. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
+            propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
+            ;} } );
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -361,21 +383,28 @@ public class HttpRequestCallDialog extends JDialog {
             {
                 buttonBar.setBorder(new EmptyBorder(12, 0, 0, 0));
                 buttonBar.setLayout(new GridBagLayout());
-                ((GridBagLayout)buttonBar.getLayout()).columnWeights = new double[] {1.0, 0.0, 0.0};
+                ((GridBagLayout)buttonBar.getLayout()).columnWeights = new double[] {1.0, 0.0, 0.0, 0.0};
+
+                //---- copyAsCurlButton ----
+                copyAsCurlButton.setText("\u590d\u5236\u4e3aCURL");
+                copyAsCurlButton.addActionListener(e -> copyAsCurlButtonActionPerformed(e));
+                buttonBar.add(copyAsCurlButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 0, 5), 0, 0));
 
                 //---- sendRequestButton ----
                 sendRequestButton.setText("\u53d1\u9001");
                 sendRequestButton.setHorizontalTextPosition(SwingConstants.CENTER);
                 sendRequestButton.setBackground(Color.red);
                 sendRequestButton.addActionListener(e -> sendRequestButtonActionPerformed(e));
-                buttonBar.add(sendRequestButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+                buttonBar.add(sendRequestButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 5), 0, 0));
 
                 //---- cancelButton ----
                 cancelButton.setText("\u5173\u95ed");
                 cancelButton.addActionListener(e -> cancelButtonActionPerformed(e));
-                buttonBar.add(cancelButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+                buttonBar.add(cancelButton, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 0), 0, 0));
             }
@@ -411,6 +440,7 @@ public class HttpRequestCallDialog extends JDialog {
     private JTextArea resultTextArea;
     private JButton cleanResultButton;
     private JPanel buttonBar;
+    private JButton copyAsCurlButton;
     private JButton sendRequestButton;
     private JButton cancelButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
