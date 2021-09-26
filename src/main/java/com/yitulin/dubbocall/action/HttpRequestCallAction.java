@@ -12,6 +12,9 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
 import com.yitulin.dubbocall.domain.request.entity.MethodDetailEntity;
 import com.yitulin.dubbocall.infrastructure.analysis.MethodAnalysisUtil;
+import com.yitulin.dubbocall.infrastructure.enums.ErrorCode;
+import com.yitulin.dubbocall.infrastructure.exception.DubboCallException;
+import com.yitulin.dubbocall.infrastructure.utils.AlertMessageUtil;
 import com.yitulin.dubbocall.ui.dialog.HttpRequestCallDialog;
 
 import cn.hutool.log.Log;
@@ -39,9 +42,14 @@ public class HttpRequestCallAction extends AnAction {
         Project project = e.getProject();
         PsiFile psiFile = e.getData(CommonDataKeys.PSI_FILE);
         PsiMethod psiMethod= (PsiMethod) psiElement;
-        MethodDetailEntity methodDetailEntity = MethodAnalysisUtil.analysis(psiFile, psiMethod);
-        methodDetailEntity.setProjectName(project.getName());
-        HttpRequestCallDialog requestCallDialog=new HttpRequestCallDialog(methodDetailEntity);
-        requestCallDialog.setVisible(true);
+        try {
+            MethodDetailEntity methodDetailEntity = MethodAnalysisUtil.analysis(psiFile, psiMethod);
+            methodDetailEntity.setProjectName(project.getName());
+            HttpRequestCallDialog requestCallDialog=new HttpRequestCallDialog(methodDetailEntity);
+            requestCallDialog.setVisible(true);
+        }catch (DubboCallException exception){
+            exception.printStackTrace();
+            AlertMessageUtil.alertErrorInfo(exception.getMessage(), ErrorCode.HTTP_REQUEST_CALL_ERROR.getTitle());
+        }
     }
 }

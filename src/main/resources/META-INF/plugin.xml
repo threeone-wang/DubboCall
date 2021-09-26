@@ -36,6 +36,9 @@
     </actions>
 
     <change-notes><![CDATA[
+    v1.2.4-SNAPSHOT：
+    支持导出curl、ESC键关闭请求框；请求调用新增支持被调用行。
+    <br/>
     v1.2.3-SNAPSHOT：
     bug修复。
     <br/>

@@ -6,6 +6,7 @@ package com.yitulin.dubbocall.ui.dialog;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,8 @@ public class HttpRequestCallDialog extends JDialog {
     public HttpRequestCallDialog(MethodDetailEntity methodDetailEntity) {
         LOG.info("初始化请求调用对话框");
         initComponents();
+        KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,0);
+        dialogPane.registerKeyboardAction(e -> formEscKeyPressed(e),stroke,JComponent.WHEN_IN_FOCUSED_WINDOW);
         // ImageIcon icon= new ImageIcon(getClass().getResource("/images/\u53d1\u9001.png"));
         // Image img = icon.getImage();
         // Image newimg = img.getScaledInstance(sendRequestButton.getWidth()>0?sendRequestButton.getWidth():78, sendRequestButton.getHeight()>0?sendRequestButton.getHeight():30,
@@ -187,7 +190,6 @@ public class HttpRequestCallDialog extends JDialog {
     }
 
     private void copyAsCurlButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
         String urlTextAreaText = urlTextArea.getText();
         String headerTextAreaText = headerTextArea.getText();
         String bodyTextAreaText = bodyTextArea.getText();
@@ -200,6 +202,10 @@ public class HttpRequestCallDialog extends JDialog {
         String curl = ConcatUtil.concatCurl(HttpRequestCallEntity.builder().url(urlTextAreaText).headerJson(headerTextAreaText).bodyJson(bodyTextAreaText).build());
         ClipboardUtil.writeString(curl);
         AlertMessageUtil.alertInfo("curl内容已复制到剪贴板","HTTP请求事件");
+    }
+
+    private void formEscKeyPressed(ActionEvent e) {
+        this.setVisible(false);
     }
 
     private void initComponents() {
@@ -239,12 +245,11 @@ public class HttpRequestCallDialog extends JDialog {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-            ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-            .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
-            . Color .red ) ,dialogPane. getBorder () ) ); dialogPane. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-            propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-            ;} } );
+            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========

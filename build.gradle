@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.yitulin'
-version '1.2.3-SNAPSHOT'
+version '1.2.4-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -35,11 +35,6 @@ intellij {
 
 publishPlugin {
 //    channels = 'Stable'
-    def jsonFile = file('/Users/yitu/OneDrive/就在脚下/我的项目/DubboCall/project-settings.json')
-    def parsedJson = new groovy.json.JsonSlurper().parseText(jsonFile.text)
-    def publishPluginToken = parsedJson.DUBBO_CALL_GRADLE_intellijPublishToken
-    println("publishPluginToken is:".plus(publishPluginToken))
-    token = publishPluginToken
 }
 
 patchPluginXml {
